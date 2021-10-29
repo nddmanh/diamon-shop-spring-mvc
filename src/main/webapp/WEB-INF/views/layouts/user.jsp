@@ -17,7 +17,7 @@
 <!-- Customize styles -->
 <link href="<c:url value="/assets/user/style.css" />" rel="stylesheet" />
 <!-- font awesome styles -->
-<link href="<c:url value="/assets/user/css/font-awesome.css" />" rel="stylesheet">
+<link href="<c:url value="/assets/user/font-awesome/css/font-awesome.css" />" rel="stylesheet">
 
 <!-- Favicons -->
 <link rel="shortcut icon" href="<c:url value="/assets/user/ico/favicon.ico" />">
