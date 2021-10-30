@@ -18,8 +18,10 @@ public class HomeController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	public ModelAndView Product() {
+	public ModelAndView Sanpham() {
 		ModelAndView mv = new ModelAndView("user/product");
 		return mv;
 	}
+	
+	
 }
