@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import DiamonShop.Dao.CategoryDao;
 import DiamonShop.Dao.MenuDao;
+import DiamonShop.Dao.ProductDao;
 import DiamonShop.Dao.SlideDao;
+import DiamonShop.Dto.ProductsDto;
 import DiamonShop.Entity.Categories;
 import DiamonShop.Entity.Menus;
 import DiamonShop.Entity.Slides;
@@ -20,6 +22,8 @@ public class HomeServiceImpl implements IHomeService {
 	private CategoryDao categoryDao;
 	@Autowired
 	private MenuDao menuDao;
+	@Autowired
+	private ProductDao productDao;
 	
 	public List<Slides> GetDataSlides() {
 		return sildeDao.GetDataSlides();
@@ -31,6 +35,11 @@ public class HomeServiceImpl implements IHomeService {
 
 	public List<Menus> GetDataMenus() {
 		return menuDao.GetDataMenus();
+	}
+
+	public List<ProductsDto> GetDataProducts() {
+		List<ProductsDto> listProducts = productDao.GetDataProducts();
+		return listProducts;
 	}
 	
 }
