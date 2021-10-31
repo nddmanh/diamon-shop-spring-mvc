@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <head>
 	<style>
 		.pagination {
@@ -26,6 +29,7 @@
 	</style>
 </head>
 <body>
+
 	<div class="well well-small">
 		<div>
 			<h3 style="display: inline-block; margin-left: 25px;">Danh sách sản phẩm</h3>
@@ -36,94 +40,63 @@
 		
 		</div>
 		
-		<div class="row-fluid">
-			<ul class="thumbnails">
-				<li class="span4">
-					<div class="thumbnail">
-						<a href="product_details.html" class="overlay"></a> <a
-							class="zoomTool" href="product_details.html" title="add to cart"><span
-							class="icon-search"></span> QUICK VIEW</a> <a
-							href="product_details.html"><img src="assets/img/a.jpg"
-							alt=""></a>
-						<div class="caption cntr">
-							<p>Manicure & Pedicure</p>
-							<p>
-								<strong> $22.00</strong>
-							</p>
-							<h4>
-								<a class="shopBtn" href="#" title="add to cart"> Add to cart
-								</a>
-							</h4>
-							<div class="actionList">
-								<a class="pull-left" href="#">Add to Wish List </a> <a
-									class="pull-left" href="#"> Add to Compare </a>
+		<c:if test="${ productsPaginate.size() > 0 }">
+		
+			<div class="row-fluid">
+				<ul class="thumbnails">	
+				
+				<c:forEach var="item" items="${ productsPaginate }" varStatus="loop">
+					<li class="span4">
+						<div class="thumbnail">
+							<a href="product_details.html" class="overlay"></a> 
+							<a class="zoomTool" href="product_details.html" title="add to cart">
+								<span class="icon-search"></span> QUICK VIEW</a> 
+							<a href="product_details.html">
+								<img src="<c:url value="/assets/user/img/${ item.img }"/>" alt="" />
+							</a>
+							<div class="caption cntr">
+								<p>${ item.name }</p>
+								<p>
+									<strong> <fmt:formatNumber type="number" groupingUsed="true" value="${ item.price }" />	 ₫</strong>
+								</p>
+								<h4>
+									<a class="shopBtn" href="#" title="add to cart"> Add to cart
+									</a>
+								</h4>
+								<div class="actionList">
+									<a class="pull-left" href="#">Add to Wish List </a> <a
+										class="pull-left" href="#"> Add to Compare </a>
+								</div>
+								<br class="clr">
 							</div>
-							<br class="clr">
 						</div>
-					</div>
-				</li>
-				<li class="span4">
-					<div class="thumbnail">
-						<a href="product_details.html" class="overlay"></a> <a
-							class="zoomTool" href="product_details.html" title="add to cart"><span
-							class="icon-search"></span> QUICK VIEW</a> <a
-							href="product_details.html"><img src="assets/img/b.jpg"
-							alt=""></a>
-						<div class="caption cntr">
-							<p>Manicure & Pedicure</p>
-							<p>
-								<strong> $22.00</strong>
-							</p>
-							<h4>
-								<a class="shopBtn" href="#" title="add to cart"> Add to cart
-								</a>
-							</h4>
-							<div class="actionList">
-								<a class="pull-left" href="#">Add to Wish List </a> <a
-									class="pull-left" href="#"> Add to Compare </a>
-							</div>
-							<br class="clr">
+					</li>
+				
+				
+					<c:if test="${ (loop.index + 1) % 3 == 0 || (loop.index + 1)  == productsPaginate.size() }">
+							</ul>
 						</div>
-					</div>
-				</li>
-				<li class="span4">
-					<div class="thumbnail">
-						<a href="product_details.html" class="overlay"></a> <a
-							class="zoomTool" href="product_details.html" title="add to cart"><span
-							class="icon-search"></span> QUICK VIEW</a> <a
-							href="product_details.html"><img src="assets/img/c.jpg"
-							alt=""></a>
-						<div class="caption cntr">
-							<p>Manicure & Pedicure</p>
-							<p>
-								<strong> $22.00</strong>
-							</p>
-							<h4>
-								<a class="shopBtn" href="#" title="add to cart"> Add to cart
-								</a>
-							</h4>
-							<div class="actionList">
-								<a class="pull-left" href="#">Add to Wish List </a> <a
-									class="pull-left" href="#"> Add to Compare </a>
-							</div>
-							<br class="clr">
-						</div>
-					</div>
-				</li>
-			</ul>
+						
+						<c:if test="${ (loop.index + 1) < productsPaginate.size() }">
+							<div class="row-fluid">
+								<ul class="thumbnails">	
+						</c:if>
+					</c:if>
+				</c:forEach>
+		</c:if>
+		
+	</div>
+	<c:if test="${ productsPaginate.size() > 0 }">
+		<div class="pagination">
+		  <c:forEach var="item" begin="1" end="${ paginateInfo.totalPage }" varStatus="loop">
+		  	<c:if test="${ (loop.index) == paginateInfo.currentPage }">
+		  		<a href='<c:url value="/san-pham/${ idCategory }/${ loop.index }" />' class="active"> ${ loop.index }</a>
+		  	</c:if>
+		  	<c:if test="${ (loop.index) != paginateInfo.currentPage }">
+		  		<a href='<c:url value="/san-pham/${ idCategory }/${ loop.index }" />'> ${ loop.index }</a>
+		  	</c:if>
+		  </c:forEach>
+		  
 		</div>
-		
-		
-	</div>
-	
-	<div class="pagination">
-	  <a href="#">&laquo;</a>
-	  <a href="#">1</a>
-	  <a href="#" class="active">2</a>
-	  <a href="#">3</a>
-	  <a href="#">4</a>
-	  <a href="#">5</a>
-	  <a href="#">6</a>
-	  <a href="#">&raquo;</a>
-	</div>
+	</c:if>
 </body>
