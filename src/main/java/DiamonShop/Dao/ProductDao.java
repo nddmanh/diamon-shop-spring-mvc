@@ -101,7 +101,7 @@ public class ProductDao {
 		return listProducts;
 	}
 
-	private String SqlProductByID(long id) {
+	private String SqlProductByID(int id) {
 		StringBuffer sql = SqlString();
 		sql.append("WHERE 1 = 1 ");
 		sql.append("AND p.id = " + id + " ");
@@ -109,7 +109,7 @@ public class ProductDao {
 		return sql.toString();
 	}
 	
-	public List<ProductsDto> GetProductByID(long id) {
+	public List<ProductsDto> GetProductByID(int id) {
 		String sql = SqlProductByID(id);
 		List<ProductsDto> listProduct = _jdbcTemplate.query(sql, new ProductsDtoMapper());
 		return listProduct;
