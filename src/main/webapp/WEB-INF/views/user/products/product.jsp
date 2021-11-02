@@ -180,6 +180,7 @@ Body Section
 					<div class="tab-pane fade" id="profile">
 
 						<c:set var="countList" value="${ productByIDCategory.size() }" />
+						
 						<c:if test="${ productByIDCategory.size() > 6 }">
 							<c:set var="countList" value="6" />
 						</c:if>

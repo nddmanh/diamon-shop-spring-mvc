@@ -3,17 +3,13 @@ package DiamonShop.Dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import DiamonShop.Dto.ProductsDto;
 import DiamonShop.Dto.ProductsDtoMapper;
 
 @Repository
-public class ProductDao {
-	@Autowired
-	public JdbcTemplate _jdbcTemplate;
+public class ProductDao extends BaseDao {
 	
 	private final boolean YES = true;
 	private final boolean NO = false;
@@ -113,5 +109,11 @@ public class ProductDao {
 		String sql = SqlProductByID(id);
 		List<ProductsDto> listProduct = _jdbcTemplate.query(sql, new ProductsDtoMapper());
 		return listProduct;
+	}
+	
+	public ProductsDto FindProductByID(int id) {
+		String sql = SqlProductByID(id);
+		ProductsDto product = _jdbcTemplate.queryForObject(sql, new ProductsDtoMapper());
+		return product;
 	}
 }

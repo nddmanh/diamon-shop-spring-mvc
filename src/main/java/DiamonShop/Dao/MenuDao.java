@@ -11,9 +11,7 @@ import DiamonShop.Entity.MapperMenus;
 import DiamonShop.Entity.Menus;
 
 @Repository
-public class MenuDao {
-	@Autowired
-	public JdbcTemplate _jdbcTemplate;
+public class MenuDao extends BaseDao {
 	
 	public List<Menus> GetDataMenus() {
 		List<Menus> list = new ArrayList<Menus>();
