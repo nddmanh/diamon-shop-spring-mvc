@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <header id="header">
 		
@@ -8,7 +9,7 @@
 	<div class="row">
 		<div class="span4">
 			<h1>
-				<a class="logo" href="index.html"> <span>Twitter
+				<a class="logo" href="<c:url value="/" />"> <span>Twitter
 						Bootstrap ecommerce template</span> <img
 					src="<c:url value="/assets/user/img/logo-bootstrap-shoping-cart.png" />"
 					alt="bootstrap sexy shop">
@@ -28,7 +29,7 @@
 				<br> <strong> Support (24/7) : 0800 1234 678 </strong><br>
 				<br>
 			</p>
-			<span class="btn btn-mini">[ 2 ] <span
+			<span class="btn btn-mini">[ ${ TotalQuantyCart } ] <span
 				class="icon-shopping-cart"></span></span> <span
 				class="btn btn-warning btn-mini">$</span> <span class="btn btn-mini">&pound;</span>
 			<span class="btn btn-mini">&euro;</span>
@@ -56,7 +57,7 @@ Navigation Bar Section
 						<c:if test="${ not index.first }">
 							<li class="">
 						</c:if>
-						<a href="index.html">${ item.name } </a></li>
+						<a href="<c:url value="/" />">${ item.name } </a></li>
 					</c:forEach>
 					
 					
