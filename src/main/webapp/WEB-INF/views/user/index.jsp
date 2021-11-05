@@ -7,15 +7,12 @@
 
 <body>
 
-	<!-- 
-Body Section 
--->
+	<!-- Body Section -->
 
 	<div class="row">
 		<div id="sidebar" class="span3">
 			<div class="well well-small">
 				<ul class="nav nav-list">
-					
 					
 					<c:forEach var="item" items="${ categories }" varStatus="index">
 			            <li>
@@ -27,7 +24,9 @@ Body Section
 					<li><a class="totalInCart" href="cart.html"><strong>Total
 								Amount <span class="badge badge-warning pull-right"
 								style="line-height: 18px;"><fmt:formatNumber type="number" groupingUsed="true" value="${ TotalPriceCart }"/> ₫</span>
-						</strong></a></li>
+						</strong></a>
+					</li>
+					
 				</ul>
 			</div>
 
@@ -45,56 +44,9 @@ Body Section
 			</div>
 
 			<a class="shopBtn btn-block" href="#">Upcoming products <br>
-				<small>Click to view</small></a> <br> <br>
-			<ul class="nav nav-list promowrapper">
-				<li>
-					<div class="thumbnail">
-						<a class="zoomTool" href="product_details.html"
-							title="add to cart"><span class="icon-search"></span> QUICK
-							VIEW</a> <img
-							src="<c:url value="/assets/user/img/bootstrap-ecommerce-templates.png" />"
-							alt="bootstrap ecommerce templates">
-						<div class="caption">
-							<h4>
-								<a class="defaultBtn" href="product_details.html">VIEW</a> <span
-									class="pull-right">$22.00</span>
-							</h4>
-						</div>
-					</div>
-				</li>
-				<li style="border: 0">&nbsp;</li>
-				<li>
-					<div class="thumbnail">
-						<a class="zoomTool" href="product_details.html"
-							title="add to cart"><span class="icon-search"></span> QUICK
-							VIEW</a> <img
-							src="<c:url value="/assets/user/img/shopping-cart-template.png" />"
-							alt="shopping cart template">
-						<div class="caption">
-							<h4>
-								<a class="defaultBtn" href="product_details.html">VIEW</a> <span
-									class="pull-right">$22.00</span>
-							</h4>
-						</div>
-					</div>
-				</li>
-				<li style="border: 0">&nbsp;</li>
-				<li>
-					<div class="thumbnail">
-						<a class="zoomTool" href="product_details.html"
-							title="add to cart"><span class="icon-search"></span> QUICK
-							VIEW</a> <img
-							src="<c:url value="/assets/user/img/bootstrap-template.png" />"
-							alt="bootstrap template">
-						<div class="caption">
-							<h4>
-								<a class="defaultBtn" href="product_details.html">VIEW</a> <span
-									class="pull-right">$22.00</span>
-							</h4>
-						</div>
-					</div>
-				</li>
-			</ul>
+				<small>Click to view</small>
+			</a> 
+			<br> <br>
 
 		</div>
 		<div class="span9">
@@ -127,9 +79,8 @@ Body Section
 						href="#myCarousel" data-slide="next">&rsaquo;</a>
 				</div>
 			</div>
-			<!--
-New Products
--->
+			<!--New Products-->
+			
 			<div class="well well-small">
 				<h3>Sản phẩm mới</h3>
 				<hr class="soften" />

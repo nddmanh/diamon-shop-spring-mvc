@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import DiamonShop.Service.User.IProductService;
 
 @Controller
-public class ProductController extends BaseController{
+public class ProductController extends BaseController {
 	
 	@Autowired
 	private IProductService _productService;
