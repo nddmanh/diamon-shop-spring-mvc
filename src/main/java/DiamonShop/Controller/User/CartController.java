@@ -7,11 +7,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import DiamonShop.Dto.CartDto;
+import DiamonShop.Entity.Bills;
+import DiamonShop.Entity.Users;
+import DiamonShop.Service.User.BillServiceImpl;
 import DiamonShop.Service.User.CartServiceImpl;
 
 @Controller
@@ -19,6 +24,9 @@ public class CartController extends BaseController{
 	
 	@Autowired
 	private CartServiceImpl cartService = new CartServiceImpl();
+	
+	@Autowired
+	private BillServiceImpl billService = new BillServiceImpl();
 	
 	@RequestMapping(value = "gio-hang")
 	public ModelAndView Index() {
@@ -30,7 +38,7 @@ public class CartController extends BaseController{
 	}
 	
 	@RequestMapping(value = "AddCart/{id}")
-	public String AddCart(HttpServletRequest request ,HttpSession session, @PathVariable int id) {
+	public String AddCart(HttpServletRequest request , HttpSession session, @PathVariable int id) {
 		HashMap<Integer, CartDto> cart = (HashMap<Integer, CartDto>)session.getAttribute("Cart");
 		if(cart == null) {
 			cart = new HashMap<Integer, CartDto>();
@@ -43,7 +51,7 @@ public class CartController extends BaseController{
 	}
 	
 	@RequestMapping(value = "EditCart/{id}/{quanty}")
-	public String EditCart(HttpServletRequest request ,HttpSession session, @PathVariable int id, @PathVariable int quanty) {
+	public String EditCart(HttpServletRequest request , HttpSession session, @PathVariable int id, @PathVariable int quanty) {
 		HashMap<Integer, CartDto> cart = (HashMap<Integer, CartDto>)session.getAttribute("Cart");
 		if(cart == null) {
 			cart = new HashMap<Integer, CartDto>();
@@ -55,9 +63,8 @@ public class CartController extends BaseController{
 		return "redirect:"+request.getHeader("Referer");
 	}
 	
-	
 	@RequestMapping(value = "DeleteCart/{id}")
-	public String DeleteCart(HttpServletRequest request ,HttpSession session, @PathVariable int id) {
+	public String DeleteCart(HttpServletRequest request , HttpSession session, @PathVariable int id) {
 		HashMap<Integer, CartDto> cart = (HashMap<Integer, CartDto>)session.getAttribute("Cart");
 		if(cart == null) {
 			cart = new HashMap<Integer, CartDto>();
@@ -67,5 +74,35 @@ public class CartController extends BaseController{
 		session.setAttribute("TotalQuantyCart", cartService.TotalQuanty(cart));
 		session.setAttribute("TotalPriceCart", cartService.TotalPrice(cart));
 		return "redirect:"+request.getHeader("Referer");
+	}
+	
+	@RequestMapping(value = "checkout", method = RequestMethod.GET)
+	public ModelAndView Checkout(HttpServletRequest request , HttpSession session) {
+		_mvShare.setViewName("user/bills/checkout");
+		Bills bills = new Bills();
+		Users loginInfo = (Users)session.getAttribute("LoginInfo");
+		if (loginInfo != null) {
+			bills.setAddress(loginInfo.getAddress());
+			bills.setDisplay_name(loginInfo.getDisplay_name());
+			bills.setUser(loginInfo.getUser());
+		}
+		_mvShare.addObject("bills", bills);
+		return _mvShare;
+	}
+	
+	@RequestMapping(value = "checkout", method = RequestMethod.POST)
+	public String CheckoutBill(HttpServletRequest request , HttpSession session, @ModelAttribute("bills") Bills bill) {
+		int quanty =  (Integer) session.getAttribute("TotalQuantyCart");
+		double price =  (Double) session.getAttribute("TotalPriceCart");
+		
+		bill.setQuanty(quanty);
+		bill.setTotal(price);
+		
+		if (billService.AddBills(bill) > 0) {
+			HashMap<Integer, CartDto> carts = (HashMap<Integer, CartDto>) session.getAttribute("Cart");
+			billService.AddBillsDetail(carts);
+		}
+		session.removeAttribute("Cart");
+		return "redirect:gio-hang";
 	}
 }

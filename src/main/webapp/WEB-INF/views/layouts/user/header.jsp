@@ -66,29 +66,40 @@ Navigation Bar Section
 				</form>
 				<ul class="nav pull-right">
 					<c:if test="${ empty LoginInfo }">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#"><span class="icon-lock"></span>
-								Login <b class="caret"></b></a>
-							<div class="dropdown-menu">
-								<form class="form-horizontal loginFrm">
-									<div class="control-group">
-										<input type="text" class="span2" id="inputEmail"
-											placeholder="Email">
-									</div>
-									<div class="control-group">
-										<input type="password" class="span2" id="inputPassword"
-											placeholder="Password">
-									</div>
-									<div class="control-group">
-										<label class="checkbox"> <input type="checkbox">
-											Remember me
-										</label>
-										<button type="submit" class="shopBtn btn-block">Sign
-											in</button>
-									</div>
-								</form>
-							</div>
-						</li>
+						<li> 
+							<a href="<c:url value="/dang-ky" />" >
+								<span class="icon-lock"></span>
+								Login
+						 	</a> 
+						 </li>
+						 
+						 <!--
+							<li class="dropdown"><a data-toggle="dropdown"
+								class="dropdown-toggle" href="<c:url value="/dang-ky" />"><span class="icon-lock"></span>
+									Login <b class="caret"></b></a>
+								<div class="dropdown-menu">
+									<form class="form-horizontal loginFrm">
+										<div class="control-group">
+											<input type="text" class="span2" id="inputEmail"
+												placeholder="Email">
+										</div>
+										<div class="control-group">
+											<input type="password" class="span2" id="inputPassword"
+												placeholder="Password">
+										</div>
+										<div class="control-group">
+											<label class="checkbox"> <input type="checkbox">
+												Remember me
+											</label>
+											<button type="submit" class="shopBtn btn-block">
+												Sign in
+											</button>
+										</div>
+									</form>
+								</div>
+							</li>
+						-->
+						
 					</c:if>
 					<c:if test="${ not empty LoginInfo }">
 						<li>${ LoginInfo.display_name }</li>
